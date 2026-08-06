@@ -15,10 +15,6 @@ def test_detail(request, slug):
 
 @login_required
 def test_submit(request, slug):
-    """
-    Обрабатывает отправку теста через HTMX (POST), возвращает готовый
-    HTML-фрагмент с результатом — без перезагрузки страницы.
-    """
     test = get_object_or_404(Test, slug=slug)
     questions = list(test.questions.prefetch_related('choices'))
 
@@ -40,9 +36,24 @@ def test_submit(request, slug):
         completed_at=timezone.now(),
     )
 
+    # Если этот тест привязан к уроку — отмечаем прогресс пользователя.
+    # Порог прохождения — 60%, ниже которого урок не засчитывается пройденным.
+    lesson = test.lessons.first()
+    lesson_completed = False
+    if lesson and score_percent >= 60:
+        from lessons.models import LessonProgress
+        LessonProgress.objects.update_or_create(
+            user=request.user,
+            lesson=lesson,
+            defaults={'is_completed': True, 'completed_at': timezone.now()},
+        )
+        lesson_completed = True
+
     return render(request, 'tests_app/result.html', {
         'test': test,
         'correct_count': correct_count,
         'total': total,
         'score_percent': score_percent,
+        'lesson': lesson,
+        'lesson_completed': lesson_completed,
     })

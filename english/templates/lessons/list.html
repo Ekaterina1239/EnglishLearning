@@ -7,11 +7,12 @@
     {% for lesson in lessons %}
         <a href="{% url 'lessons:detail' lesson.slug %}" class="list-item">
             {{ lesson.title }}
+            {% if lesson.id in completed_lesson_ids %}
+                <span style="color: green;">✓ {% translate "completed" %}</span>
+            {% endif %}
         </a>
     {% empty %}
-        <p class="empty-state">
-            {% translate "No lessons yet — add them via" %} <a href="/admin/">{% translate "the admin panel" %}</a>.
-        </p>
+        <p class="empty-state">{% translate "No lessons yet — add them via" %} <a href="/admin/">{% translate "the admin panel" %}</a>.</p>
     {% endfor %}
 </div>
 {% endblock %}

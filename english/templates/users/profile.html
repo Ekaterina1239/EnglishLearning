@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "My profile" %}{% endblock %}
+{% block content %}
+<h1>{% translate "My profile" %}</h1>
+<div class="card">
+    <p><strong>{% translate "Username" %}:</strong> {{ user.username }}</p>
+    <p><strong>{% translate "English level" %}:</strong> {{ user.get_english_level_display }}</p>
+    <p><strong>{% translate "Progress" %}:</strong> {{ completed_lessons }} / {{ total_lessons }} ({{ progress_percent }}%)</p>
+</div>
+{% endblock %}

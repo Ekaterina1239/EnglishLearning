@@ -2,7 +2,7 @@
 {% load i18n %}
 {% block title %}{{ lesson.title }}{% endblock %}
 {% block content %}
-<h1>{{ lesson.title }}</h1>
+<h1>{{ lesson.title }} {% if is_completed %}<span style="color: green;">✓</span>{% endif %}</h1>
 
 {% if lesson.grammar_topic %}
 <div class="card">
@@ -19,6 +19,8 @@
 {% endif %}
 
 {% if lesson.test %}
-<a href="{% url 'tests_app:detail' lesson.test.slug %}" class="btn">{% translate "Take the test" %}</a>
+<a href="{% url 'tests_app:detail' lesson.test.slug %}" class="btn">
+    {% if is_completed %}{% translate "Retake the test" %}{% else %}{% translate "Take the test" %}{% endif %}
+</a>
 {% endif %}
 {% endblock %}
