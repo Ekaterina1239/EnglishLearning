@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ lesson.title }}{% endblock %}
+{% block content %}
+<h1>{{ lesson.title }}</h1>
+
+{% if lesson.grammar_topic %}
+<div class="card">
+    <h3>{% translate "Grammar" %}: {{ lesson.grammar_topic.title }}</h3>
+    <p>{{ lesson.grammar_topic.explanation }}</p>
+</div>
+{% endif %}
+
+{% if lesson.reading_text %}
+<div class="card">
+    <h3>{% translate "Reading" %}: {{ lesson.reading_text.title }}</h3>
+    <p>{{ lesson.reading_text.body }}</p>
+</div>
+{% endif %}
+
+{% if lesson.test %}
+<a href="{% url 'tests_app:detail' lesson.test.slug %}" class="btn">{% translate "Take the test" %}</a>
+{% endif %}
+{% endblock %}

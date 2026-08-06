@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Lessons" %}{% endblock %}
+{% block content %}
+<h1>{% translate "Lessons" %}</h1>
+<div class="list-group">
+    {% for lesson in lessons %}
+        <a href="{% url 'lessons:detail' lesson.slug %}" class="list-item">
+            {{ lesson.title }}
+        </a>
+    {% empty %}
+        <p class="empty-state">
+            {% translate "No lessons yet — add them via" %} <a href="/admin/">{% translate "the admin panel" %}</a>.
+        </p>
+    {% endfor %}
+</div>
+{% endblock %}
