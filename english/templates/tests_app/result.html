@@ -1,0 +1,6 @@
+{% load i18n %}
+<div class="card">
+    <h3>{% translate "Result" %}: {{ score_percent }}%</h3>
+    <p>{% translate "Correct answers" %}: {{ correct_count }} / {{ total }}</p>
+    <a href="{% url 'lessons:list' %}" class="btn">{% translate "Back to lessons" %}</a>
+</div>

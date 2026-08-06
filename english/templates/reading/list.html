@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Reading" %}{% endblock %}
+{% block content %}
+<h1>{% translate "Reading texts" %}</h1>
+<div class="list-group">
+    {% for text in texts %}
+        <a href="{% url 'reading:detail' text.slug %}" class="list-item">
+            {{ text.title }} <span class="badge">{{ text.level }}</span>
+        </a>
+    {% empty %}
+        <p class="empty-state">{% translate "No texts yet." %}</p>
+    {% endfor %}
+</div>
+{% endblock %}

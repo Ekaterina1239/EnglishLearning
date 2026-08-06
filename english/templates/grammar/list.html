@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Grammar" %}{% endblock %}
+{% block content %}
+<h1>{% translate "Grammar topics" %}</h1>
+<div class="list-group">
+    {% for topic in topics %}
+        <a href="{% url 'grammar:detail' topic.slug %}" class="list-item">
+            {{ topic.title }} <span class="badge">{{ topic.level }}</span>
+        </a>
+    {% empty %}
+        <p class="empty-state">{% translate "No topics yet." %}</p>
+    {% endfor %}
+</div>
+{% endblock %}

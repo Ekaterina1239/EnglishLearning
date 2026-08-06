@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ text.title }}{% endblock %}
+{% block content %}
+<h1>{{ text.title }} <span class="badge">{{ text.level }}</span></h1>
+<div class="card">{{ text.body|linebreaks }}</div>
+
+{% if text.questions.all %}
+<h3>{% translate "Comprehension questions" %}</h3>
+<ol>
+    {% for q in text.questions.all %}
+        <li>{{ q.question }}</li>
+    {% endfor %}
+</ol>
+{% endif %}
+{% endblock %}

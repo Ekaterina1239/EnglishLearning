@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ topic.title }}{% endblock %}
+{% block content %}
+<h1>{{ topic.title }} <span class="badge">{{ topic.level }}</span></h1>
+<div class="card">
+    <p>{{ topic.explanation|linebreaks }}</p>
+</div>
+
+{% if topic.examples.all %}
+<h3>{% translate "Examples" %}</h3>
+<ul>
+    {% for ex in topic.examples.all %}
+        <li>
+            <strong>{{ ex.sentence_en }}</strong>
+            {% if ex.sentence_translation %}— <em>{{ ex.sentence_translation }}</em>{% endif %}
+            {% if ex.note %}<br><small>{{ ex.note }}</small>{% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

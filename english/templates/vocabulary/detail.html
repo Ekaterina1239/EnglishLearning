@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ vocab_set.title }}{% endblock %}
+{% block content %}
+<h1>{{ vocab_set.title }}</h1>
+<div class="list-group">
+    {% for word in vocab_set.words.all %}
+        <div class="card">
+            <strong>{{ word.word_en }}</strong>
+            {% if word.transcription %}<span>{{ word.transcription }}</span>{% endif %}
+            — {{ word.translation }}
+            {% if word.example_sentence %}<br><em>{{ word.example_sentence }}</em>{% endif %}
+        </div>
+    {% empty %}
+        <p class="empty-state">{% translate "No words yet." %}</p>
+    {% endfor %}
+</div>
+{% endblock %}
