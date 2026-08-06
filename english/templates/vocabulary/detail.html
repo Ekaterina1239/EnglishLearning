@@ -3,6 +3,15 @@
 {% block title %}{{ vocab_set.title }}{% endblock %}
 {% block content %}
 <h1>{{ vocab_set.title }}</h1>
+
+{% if can_edit %}
+<div style="margin-bottom:1rem;">
+    <a href="{% url 'vocabulary:edit' vocab_set.slug %}" class="btn">{% translate "Edit set" %}</a>
+    <a href="{% url 'vocabulary:delete' vocab_set.slug %}" class="btn" style="background:#c0392b;">{% translate "Delete set" %}</a>
+    <a href="{% url 'vocabulary:word_add' vocab_set.slug %}" class="btn">{% translate "+ Add word" %}</a>
+</div>
+{% endif %}
+
 <div class="list-group">
     {% for word in vocab_set.words.all %}
         <div class="card">
@@ -10,6 +19,12 @@
             {% if word.transcription %}<span>{{ word.transcription }}</span>{% endif %}
             — {{ word.translation }}
             {% if word.example_sentence %}<br><em>{{ word.example_sentence }}</em>{% endif %}
+            {% if can_edit %}
+                <form method="post" action="{% url 'vocabulary:word_delete' vocab_set.slug word.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn" style="background:#c0392b; padding:0.2rem 0.6rem; font-size:0.8rem;">✕</button>
+                </form>
+            {% endif %}
         </div>
     {% empty %}
         <p class="empty-state">{% translate "No words yet." %}</p>

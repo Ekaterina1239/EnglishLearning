@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -5,6 +6,11 @@ class VocabularySet(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=220, unique=True)
     description = models.CharField(max_length=500, blank=True)
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        null=True, blank=True, related_name="vocabulary_sets",
+        help_text="Пусто = официальный набор (добавлен через /admin/). Заполнено = личный набор пользователя.",
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

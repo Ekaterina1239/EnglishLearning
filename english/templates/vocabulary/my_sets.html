@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "My vocabulary sets" %}{% endblock %}
+{% block content %}
+<h1>{% translate "My vocabulary sets" %}</h1>
+<a href="{% url 'vocabulary:create' %}" class="btn">{% translate "+ New set" %}</a>
+<div class="list-group" style="margin-top:1rem;">
+    {% for s in sets %}
+        <a href="{% url 'vocabulary:detail' s.slug %}" class="list-item">{{ s.title }}</a>
+    {% empty %}
+        <p class="empty-state">{% translate "You have no personal sets yet." %}</p>
+    {% endfor %}
+</div>
+{% endblock %}

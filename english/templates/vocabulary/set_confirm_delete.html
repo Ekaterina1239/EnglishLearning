@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Delete set" %}{% endblock %}
+{% block content %}
+<h1>{% translate "Delete" %} "{{ vocab_set.title }}"?</h1>
+<form method="post" class="card">
+    {% csrf_token %}
+    <p>{% translate "This action cannot be undone." %}</p>
+    <button type="submit" class="btn" style="background:#c0392b;">{% translate "Delete" %}</button>
+    <a href="{% url 'vocabulary:detail' vocab_set.slug %}" class="btn" style="background:#888;">{% translate "Cancel" %}</a>
+</form>
+{% endblock %}

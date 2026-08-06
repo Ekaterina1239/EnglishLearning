@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Vocabulary set" %}{% endblock %}
+{% block content %}
+<h1>{% if is_create %}{% translate "New set" %}{% else %}{% translate "Edit set" %}{% endif %}</h1>
+<form method="post" class="card">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">{% translate "Save" %}</button>
+</form>
+{% endblock %}
