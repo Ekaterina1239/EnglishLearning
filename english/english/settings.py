@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'tests_app',
     'users',
     'vocabulary',
+    'dashboard'
 ]
 
 MIDDLEWARE = [

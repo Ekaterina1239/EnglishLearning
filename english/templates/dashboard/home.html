@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Moderation dashboard</h1>
+
+<div class="card">
+    <p><strong>Total users:</strong> {{ total_users }}</p>
+    <p><strong>Total test attempts:</strong> {{ total_attempts }}</p>
+    <p><strong>Completed lessons:</strong> {{ completed_lessons }}</p>
+</div>
+
+<h3>Weakest tests (lowest average score)</h3>
+<div class="list-group">
+    {% for test in weak_tests %}
+        <div class="card">
+            {{ test.title }} — avg {{ test.avg_score|floatformat:1 }}% ({{ test.attempts_count }} attempts)
+        </div>
+    {% empty %}
+        <p class="empty-state">No test attempts yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}
