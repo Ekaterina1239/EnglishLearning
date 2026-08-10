@@ -344,3 +344,8 @@ input:focus, select:focus, textarea:focus {
     .navbar-inner { flex-direction: column; align-items: flex-start; }
     .hero h1 { font-size: 1.6rem; }
 }
+
+.navbar-links form button.nav-link:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary-dark);
+}
