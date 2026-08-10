@@ -9,5 +9,7 @@ urlpatterns = [
     path('tests/', include('tests_app.urls')),
     path('accounts/', include('users.urls')),
     path('dashboard/', include('dashboard.urls')),
+    path('about/', include('about.urls')),
+    path('ai/', include('ai_assistant.urls')),
     path('', include('lessons.urls')),
 ]

@@ -4,11 +4,22 @@
     <p>{% translate "Correct answers" %}: {{ correct_count }} / {{ total }}</p>
 
     {% if lesson_completed %}
-        <p style="color: green;">✓ {% translate "Lesson completed!" %} {{ lesson.title }}</p>
+        <p class="badge badge-success">✓ {% translate "Lesson completed!" %} {{ lesson.title }}</p>
     {% elif lesson %}
-        <p style="color: #b45309;">{% translate "Score too low to complete the lesson (need 60%+). Try again!" %}</p>
-        <a href="{% url 'tests_app:detail' test.slug %}" class="btn">{% translate "Retry test" %}</a>
+        <p class="badge badge-warning">{% translate "Score too low (need 60%+). Try again!" %}</p>
+        <a href="{% url 'tests_app:detail' test.slug %}" class="btn btn-sm">{% translate "Retry test" %}</a>
     {% endif %}
 
-    <a href="{% url 'lessons:list' %}" class="btn">{% translate "Back to lessons" %}</a>
+    {% if has_mistakes %}
+        <div id="ai-explanation-wrapper" style="margin-top:1rem;">
+            <button class="btn btn-outline btn-sm"
+                    hx-get="{% url 'ai_assistant:explain_mistakes' %}"
+                    hx-target="#ai-explanation-wrapper"
+                    hx-swap="innerHTML">
+                💡 {% translate "Get personalized feedback" %}
+            </button>
+        </div>
+    {% endif %}
+
+    <a href="{% url 'lessons:list' %}" class="btn btn-sm" style="margin-top:1rem;">{% translate "Back to lessons" %}</a>
 </div>

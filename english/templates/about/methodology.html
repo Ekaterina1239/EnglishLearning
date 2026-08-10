@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Methodology" %}{% endblock %}
+{% block content %}
+<div class="container" style="padding-top:1.5rem;">
+<h1>{% translate "Methodology & Research" %}</h1>
+
+<div class="card">
+    <p>
+        This application is grounded in ongoing academic research on AI-assisted
+        language learning. Two design decisions in this app — the AI-generated
+        explanations for test mistakes, and the emphasis on adaptive, personalized
+        practice — are directly informed by this research.
+    </p>
+</div>
+
+<h3 class="section-title">Related publications</h3>
+
+<div class="card">
+    <h3>AI in Language Learning</h3>
+    <p>Co-authored research on AI innovations in language learning and communication.</p>
+    <a href="https://doi.org/10.5281/p75ddt46" class="btn btn-outline btn-sm" target="_blank" rel="noopener">
+        View publication (DOI)
+    </a>
+</div>
+
+<div class="card">
+    <h3>AI &amp; English Proficiency</h3>
+    <p>Research on generative AI-assisted exam preparation and English proficiency.</p>
+    <span class="badge badge-warning">Publication in progress</span>
+</div>
+</div>
+{% endblock %}

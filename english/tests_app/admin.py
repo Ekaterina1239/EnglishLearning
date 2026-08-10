@@ -23,8 +23,8 @@ class TestAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    list_display = ("text", "test", "order")
-    list_filter = ("test",)
+    list_display = ("text", "test", "category", "order")
+    list_filter = ("test", "category")
     inlines = [ChoiceInline]
 
 

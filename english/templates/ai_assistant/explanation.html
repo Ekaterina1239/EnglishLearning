@@ -1,0 +1,16 @@
+{% load i18n %}
+{% if no_mistakes %}
+    <div class="card"><p class="empty-state">{% translate "No mistakes to review — great job!" %}</p></div>
+{% else %}
+    {% for item in feedback %}
+        <div class="card" style="border-color: var(--color-accent);">
+            <h3>{{ item.question }}</h3>
+            <p><strong>{% translate "You chose" %}:</strong> {{ item.chosen }}</p>
+            <p><strong>{% translate "Correct answer" %}:</strong> {{ item.correct }}</p>
+            {% if item.specific_explanation %}
+                <p>💡 {{ item.specific_explanation }}</p>
+            {% endif %}
+            <p style="color: var(--color-text-muted); font-size: 0.9rem;">{{ item.general_tip }}</p>
+        </div>
+    {% endfor %}
+{% endif %}

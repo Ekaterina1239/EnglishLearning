@@ -16,8 +16,20 @@ class Test(models.Model):
 
 
 class Question(models.Model):
+    class Category(models.TextChoices):
+        VERB_TENSE = "verb_tense", "Verb tense"
+        ARTICLES = "articles", "Articles (a/an/the)"
+        PREPOSITIONS = "prepositions", "Prepositions"
+        SUBJECT_VERB = "subject_verb", "Subject-verb agreement"
+        WORD_ORDER = "word_order", "Word order"
+        VOCABULARY = "vocabulary", "Vocabulary / word choice"
+        OTHER = "other", "Other"
+
     test = models.ForeignKey(Test, on_delete=models.CASCADE, related_name="questions")
     text = models.CharField(max_length=500)
+    category = models.CharField(
+        max_length=20, choices=Category.choices, default=Category.OTHER,
+    )
     order = models.PositiveIntegerField(default=0)
 
     class Meta:
@@ -31,6 +43,7 @@ class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="choices")
     text = models.CharField(max_length=300)
     is_correct = models.BooleanField(default=False)
+    explanation = models.CharField(max_length=300, blank=True)
 
     def __str__(self):
         return self.text
